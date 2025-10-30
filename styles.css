@@ -1,0 +1,197 @@
+:root {
+  --bg: #fff8f5;
+  --card: #ffffff;
+  --muted: #7d7d7d;
+  --accent: #ffa8b6;
+  --accent-2: #c9f0ff;
+  --radius: 16px;
+  --shadow: 0 10px 25px rgba(0,0,0,0.08);
+  --font-main: 'Inter', sans-serif;
+  --font-fancy: 'Comfortaa', cursive;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; font-family: var(--font-main); background: var(--bg); color: #111; }
+
+.site-header {
+  text-align: center;
+  background: linear-gradient(90deg, var(--accent-2), #fff);
+  padding: 40px 20px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.site-header h1 {
+  font-family: var(--font-fancy);
+  font-size: 2.6rem;
+  margin-bottom: 8px;
+  color: #ff6b81;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 1rem;
+  margin-bottom: 16px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.controls button, .controls .github-link {
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.controls button {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+
+.controls button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+}
+
+.controls .github-link {
+  text-decoration: none;
+  color: var(--muted);
+  border: 1px solid rgba(0,0,0,0.1);
+  background: #fff;
+}
+
+.container {
+  max-width: 1024px;
+  margin: 36px auto;
+  padding: 0 20px;
+}
+
+.add-section {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.add-section h2 { font-size: 1.3rem; color: #ff6b81; margin-bottom: 12px; }
+
+.add-section form input, .add-section form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.1);
+  font-size: 0.95rem;
+  background: #fff;
+  transition: border 0.2s;
+}
+
+.add-section form input:focus, .add-section form textarea:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.add-section .row { display: flex; gap: 12px; flex-wrap: wrap; }
+.add-section .row input { flex: 1; }
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  border-radius: 12px;
+  transition: transform 0.2s;
+}
+
+.btn-primary:hover { transform: translateY(-2px); }
+
+.btn-cancel {
+  background: #f4f4f4;
+  color: #555;
+  border-radius: 12px;
+}
+
+h2 { font-size: 1.2rem; margin-bottom: 16px; color: #ff6b81; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.card h3 {
+  font-size: 1.1rem;
+  margin: 12px 0 6px 0;
+  color: #ff6b81;
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.card .meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card .price {
+  font-weight: 600;
+  color: #333;
+}
+
+.card .actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn { padding: 8px 12px; border-radius: 12px; cursor: pointer; font-weight: 600; border: none; transition: transform 0.2s; }
+.btn-primary { background: #6bd1a9; color: #fff; }
+.btn-primary:hover { transform: translateY(-2px); }
+.btn-ghost { background: transparent; border: 1px solid rgba(0,0,0,0.1); }
+
+.purchased { opacity: 0.7; filter: grayscale(0.05); position: relative; }
+
+.purchased .purchased-badge {
+  position: absolute;
+  top: 12px; right: 12px;
+  background: #ffd9e0;
+  color: #a5002a;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.footer { margin: 40px 0; text-align: center; font-size: 0.9rem; color: var(--muted); }
