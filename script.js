@@ -172,7 +172,7 @@ function cardFromData(id, data) {
     const buy = document.createElement("a");
     buy.href = data.link;
     buy.target = "_blank";
-    buy.textContent = "Buy";
+    buy.textContent = "View";
     buy.className =
       "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-2 text-sm rounded-lg transition";
     actions.appendChild(buy);
