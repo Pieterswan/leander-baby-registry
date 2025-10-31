@@ -212,7 +212,7 @@ function cardFromData(id, data) {
     const buy = document.createElement("a");
     buy.href = data.link;
     buy.target = "_blank";
-    buy.textContent = "View Item";
+    buy.textContent = "Maak Oop";
     buy.className =
       "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-2 text-sm rounded-lg transition";
     actions.appendChild(buy);
@@ -227,8 +227,8 @@ function cardFromData(id, data) {
       : "bg-green-500 hover:bg-green-600 text-white font-semibold py-1 px-2 text-sm rounded-lg transition";
 
     buyBtn.addEventListener("click", async () => {
-      const purchaser = prompt("Enter your name (so others know who purchased it):");
-      if (!purchaser) return alert("Purchase canceled — name required.");
+      const purchaser = prompt("Sluetel asb jou naam (of skuilnaam 😉) in sodat ander kan weet dit is gekoop:");
+      if (!purchaser) return alert("PKoop Gekanselleer 🥺");
       try {
         showLoader();
         await updateDoc(doc(db, "registryItems", id), {
