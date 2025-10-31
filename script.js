@@ -117,14 +117,15 @@ addForm.addEventListener("submit", async (e) => {
       purchased: false,
       contributedGift: false,
     });
-    addForm.reset();
-    addSection.classList.add("hidden");
+    addForm.reset(); // <-- just reset the form
+    // addSection.classList.add("hidden"); <-- remove this line
   } catch (err) {
     alert("Failed to add item: " + err.message);
   } finally {
     hideLoader();
   }
 });
+
 
 // 🎁 Add own (public) gift
 addOwnGiftForm.addEventListener("submit", async (e) => {
@@ -219,7 +220,7 @@ function cardFromData(id, data) {
 
   if (!data.contributedGift) {
     const buyBtn = document.createElement("button");
-    buyBtn.textContent = data.purchased ? "Purchased ✅" : "Mark as Purchased";
+    buyBtn.textContent = data.purchased ? "Gekoop 🥳" : "Merk as Gekoop";
     buyBtn.disabled = !!data.purchased;
     buyBtn.className = data.purchased
       ? "bg-gray-400 cursor-not-allowed text-white font-semibold py-1 px-2 text-sm rounded-lg"
@@ -274,8 +275,8 @@ function cardFromData(id, data) {
     badge.className =
       "absolute top-3 right-3 bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-bold shadow";
     badge.textContent = data.contributedGift
-      ? `🎁 Contributed by ${data.purchaserName || "Someone"} (x${data.quantity || 1})`
-      : `✓ Purchased by ${data.purchaserName || "Someone"}`;
+      ? `🎁 Bygedra deur ${data.purchaserName || "Someone"} (x${data.quantity || 1})`
+      : `✓ Gekoop deur ${data.purchaserName || "Someone"}`;
     card.appendChild(badge);
   }
 
