@@ -5,80 +5,120 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Baby Leander — Gift Registry</title>
 
-  <!-- Tailwind CDN -->
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    body { font-family: 'Inter', sans-serif; }
+    body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #e0f2fe, #f9fafb); }
     h1, h2, h3 { font-family: 'Comfortaa', cursive; }
+    #loader { transition: opacity 0.3s ease; }
+    .header-bg {
+      background: linear-gradient(120deg, #93c5fd, #bfdbfe, #f0f9ff);
+    }
   </style>
 </head>
-<body class="bg-gradient-to-b from-blue-50 to-white min-h-screen">
+<body class="min-h-screen flex flex-col">
 
-  <header class="bg-gradient-to-r from-blue-100 via-blue-200 to-white p-10 text-center shadow-md">
-    <h1 class="text-4xl text-blue-500 mb-2"> Leander Swanepoel 🧸</h1>
-    <p class="text-gray-600 mb-4">Pick something sweet — mark it as purchased so others know.</p>
+  <header class="header-bg p-10 text-center shadow-md">
+    <h1 class="text-4xl md:text-5xl text-blue-700 font-bold mb-2">Baby Leander 🧸</h1>
+    <p class="text-gray-700 mb-4">Select a gift for our little boy and mark it as purchased 💙</p>
     <div class="flex justify-center gap-4 flex-wrap">
-      <button id="adminToggle" class="px-4 py-2 rounded-lg bg-blue-400 text-white font-semibold hover:bg-blue-500 transition">Admin</button>
+      <button id="addOwnGiftToggle" class="px-5 py-2 rounded-lg bg-teal-500 text-white font-semibold hover:bg-teal-600 transition shadow">
+        Add My Own Gift
+      </button>
     </div>
   </header>
 
+  <!-- Welcome Card -->
+<section id="welcomeCard" class="max-w-3xl mx-auto mt-8 mb-10 px-6">
+  <div class="bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 rounded-2xl shadow-md p-6 relative overflow-hidden">
+    <button id="closeWelcomeCard" 
+            class="absolute top-3 right-3 text-blue-400 hover:text-blue-600 transition text-xl font-bold leading-none">
+      &times;
+    </button>
+    <h2 class="text-2xl md:text-3xl font-bold text-blue-700 mb-3">Welkom 💙</h2>
+
+    <p class="text-gray-700 leading-relaxed italic">
+     Dankie dat jy saam met ons hierdie spesiale tyd vier.  
+      Ons sien baie uit na ons seuntjie se aankoms en waardeer elke gebaar van liefde 💙
+    </p>
+    <p class="mt-4 text-right text-gray-600 font-medium">
+      — Baie liefde, Pieter & Kylie 
+    </p>
+  </div>
+</section>
+
+
   <!-- Admin Mode Banner -->
-<div
-  id="adminBanner"
-  class="hidden bg-yellow-100 border border-yellow-300 text-yellow-800 text-sm text-center py-2 font-semibold flex justify-center items-center gap-3"
->
-  🛠️ Admin Mode Active
-  <button
-    id="exitAdminBtn"
-    class="px-3 py-1 bg-yellow-300 text-yellow-800 font-semibold rounded-md hover:bg-yellow-400 transition"
-  >
-    Exit Admin
-  </button>
-</div>
+  <div id="adminBanner" class="hidden bg-yellow-100 border-t border-yellow-300 text-yellow-800 text-sm text-center py-2 font-semibold flex justify-center items-center gap-3">
+    🛠️ Admin Mode Active
+    <button id="exitAdminBtn" class="px-3 py-1 bg-yellow-300 text-yellow-800 font-semibold rounded-md hover:bg-yellow-400 transition">
+      Exit Admin
+    </button>
+  </div>
 
-<!-- Loader -->
-<div
-  id="loader"
-  class="fixed inset-0 flex items-center justify-center bg-white bg-opacity-80 z-50"
->
-  <div
-    class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"
-  ></div>
-</div>
+  <!-- Loader -->
+  <div id="loader" class="fixed inset-0 flex items-center justify-center bg-white bg-opacity-80 z-50">
+    <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+  </div>
 
-  <main class="max-w-5xl mx-auto px-6 py-10">
+  <main class="max-w-6xl mx-auto px-6 py-10 flex-grow">
 
-    <section id="addSection" class="hidden bg-white p-6 rounded-2xl shadow-lg mb-10">
-      <h2 class="text-2xl text-blue-500 mb-4">Add a Gift</h2>
+    <!-- Admin Add Gift -->
+    <section id="addSection" class="hidden bg-white p-6 rounded-2xl shadow-lg mb-10 border border-blue-100">
+      <h2 class="text-2xl text-blue-700 font-bold mb-4">Add a Gift</h2>
       <form id="addForm" class="space-y-4">
         <div class="flex gap-4 flex-wrap">
-          <input id="name" placeholder="Gift name" required class="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-blue-300" />
-          <input id="price" placeholder="Price (optional)" class="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-blue-300" />
+          <input id="name" placeholder="Gift name" required class="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400" />
+          <input id="price" placeholder="Price (optional)" class="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400" />
         </div>
-        <input id="image" placeholder="Image URL (optional)" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-300" />
-        <input id="link" placeholder="Buy link (optional)" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-300" />
-        <textarea id="description" placeholder="Short description" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-300"></textarea>
+        <input id="image" placeholder="Image URL (optional)" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-400" />
+        <input id="link" placeholder="Buy link (optional)" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-400" />
+        <textarea id="description" placeholder="Short description" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-400"></textarea>
         <div class="flex gap-4 flex-wrap">
-          <button type="submit" class="px-4 py-2 rounded-xl bg-blue-400 text-white font-semibold hover:bg-blue-500 transition">Add Gift</button>
-          <button id="cancelAdd" type="button" class="px-4 py-2 rounded-xl bg-gray-200 text-gray-700 hover:bg-gray-300 transition">Cancel</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-blue-500 text-white font-semibold hover:bg-blue-600 transition shadow">Add Gift</button>
+          <button id="cancelAdd" type="button" class="px-5 py-2 rounded-xl bg-gray-200 text-gray-700 hover:bg-gray-300 transition shadow">Cancel</button>
         </div>
       </form>
     </section>
 
+    <!-- Public Add Own Gift -->
+    <section id="addOwnGiftSection" class="hidden bg-white p-6 rounded-2xl shadow-lg mb-10 border border-teal-100">
+      <h2 class="text-2xl text-teal-600 font-bold mb-4">Add Your Own Gift 🎁</h2>
+      <form id="addOwnGiftForm" class="space-y-4">
+        <input id="ownName" placeholder="Your name" required class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-400" />
+        <input id="ownGiftName" placeholder="What did you buy?" required class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-400" />
+        <input id="ownQuantity" placeholder="How many?" type="number" min="1" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-400" />
+        <textarea id="ownDescription" placeholder="Short description (optional)" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-400"></textarea>
+        <div class="flex gap-4 flex-wrap">
+          <button type="submit" class="px-5 py-2 rounded-xl bg-teal-500 text-white font-semibold hover:bg-teal-600 transition shadow">Add My Gift</button>
+          <button id="cancelOwnGift" type="button" class="px-5 py-2 rounded-xl bg-gray-200 text-gray-700 hover:bg-gray-300 transition shadow">Cancel</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Registry Items -->
     <section>
-      <h2 class="text-2xl text-blue-500 mb-6">Registry Items</h2>
+      <h2 class="text-2xl text-blue-700 font-bold mb-6">Gift Registry</h2>
       <div id="itemsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
     </section>
   </main>
 
-  <footer class="text-center text-gray-500 py-10">
-    <small>Built with❤️ by Leander's daddy</small>
-  </footer>
+ <footer class="text-center text-gray-500 py-10 bg-gradient-to-t from-blue-50 to-transparent relative">
+  <small>Made with 💙 by Leander’s daddy</small>
+
+  <!-- Hidden Admin Button -->
+  <button id="adminToggle" 
+          class="absolute bottom-2 right-2 text-xs text-blue-500 hover:text-blue-700 underline transition">
+    Admin Mode
+  </button>
+</footer>
+
 
   <script type="module" src="script.js"></script>
 </body>
