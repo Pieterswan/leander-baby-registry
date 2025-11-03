@@ -59,7 +59,7 @@ function hideLoader() {
   setTimeout(() => (loader.style.display = "none"), 300);
 }
 
-// Admin toggle
+// Admin toggle with auto-scroll and focus
 adminToggle.addEventListener("click", () => {
   const pin = prompt("Enter admin PIN:");
   if (pin === ADMIN_PIN) {
@@ -67,10 +67,20 @@ adminToggle.addEventListener("click", () => {
     addSection.classList.remove("hidden");
     adminBanner.classList.remove("hidden");
     renderItems();
+
+    // Smoothly scroll to the admin add section
+    addSection.scrollIntoView({ behavior: "smooth", block: "center" });
+
+    // Focus on the first input after scrolling
+    setTimeout(() => {
+      const firstAdminInput = document.getElementById("name");
+      if (firstAdminInput) firstAdminInput.focus();
+    }, 600);
   } else {
-    alert("Wrong PIN (set ADMIN_PIN in script.js).");
+    alert("Wrong PIN.");
   }
 });
+
 
 // Exit admin mode
 exitAdminBtn.addEventListener("click", () => {
@@ -83,9 +93,21 @@ exitAdminBtn.addEventListener("click", () => {
 // Cancel add
 cancelAdd.addEventListener("click", () => addSection.classList.add("hidden"));
 
-// Show user "add own gift" form
+// Show user "add own gift" form and focus first input
 addOwnGiftToggle.addEventListener("click", () => {
+  const wasHidden = addOwnGiftSection.classList.contains("hidden");
   addOwnGiftSection.classList.toggle("hidden");
+
+  if (wasHidden) {
+    // Smoothly scroll to the section
+    addOwnGiftSection.scrollIntoView({ behavior: "smooth", block: "center" });
+
+    // Wait a moment for scroll animation, then focus
+    setTimeout(() => {
+      const firstInput = document.getElementById("ownName");
+      if (firstInput) firstInput.focus();
+    }, 600);
+  }
 });
 
 // Cancel user gift form
@@ -95,7 +117,7 @@ cancelOwnGift.addEventListener("click", () => addOwnGiftSection.classList.add("h
 addForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const name = document.getElementById("name").value.trim();
-  const price = document.getElementById("price").value.trim();
+  // const price = document.getElementById("price").value.trim();
   const image = document.getElementById("image").value.trim() || DEFAULT_IMAGE;
   const link = document.getElementById("link").value.trim();
   const description = document.getElementById("description").value.trim();
@@ -109,7 +131,7 @@ addForm.addEventListener("submit", async (e) => {
     showLoader();
     await addDoc(collection(db, "registryItems"), {
       name,
-      price,
+      // price,
       image,
       link,
       description,
@@ -187,7 +209,7 @@ function cardFromData(id, data) {
 
   const img = document.createElement("img");
   img.src = data.image || DEFAULT_IMAGE;
-  img.alt = data.name || "Gift item";
+  img.alt = data.name || "Item naam";
   img.className = "w-full h-48 object-cover";
 
   const title = document.createElement("h3");
@@ -201,9 +223,9 @@ function cardFromData(id, data) {
   const meta = document.createElement("div");
   meta.className = "flex flex-col items-center px-4 mb-4 text-center";
 
-  const price = document.createElement("div");
-  price.className = "font-semibold text-gray-800 mb-2";
-  price.textContent = data.price ? "R " + data.price : "";
+  // const price = document.createElement("div");
+  // price.className = "font-semibold text-gray-800 mb-2";
+  // price.textContent = data.price ? "R " + data.price : "";
 
   const actions = document.createElement("div");
   actions.className = "flex flex-col gap-2 w-full max-w-[160px]";
@@ -227,8 +249,8 @@ function cardFromData(id, data) {
       : "bg-green-500 hover:bg-green-600 text-white font-semibold py-1 px-2 text-sm rounded-lg transition";
 
     buyBtn.addEventListener("click", async () => {
-      const purchaser = prompt("Sluetel asb jou naam (of skuilnaam 😉) in sodat ander kan weet dit is gekoop:");
-      if (!purchaser) return alert("PKoop Gekanselleer 🥺");
+      const purchaser = prompt("Sleutel asb jou naam (of skuilnaam 😉) in sodat ander kan weet dit is gekoop:");
+      if (!purchaser) return alert("Koop Gekanselleer 🥺");
       try {
         showLoader();
         await updateDoc(doc(db, "registryItems", id), {
@@ -237,7 +259,7 @@ function cardFromData(id, data) {
           purchasedAt: serverTimestamp(),
         });
       } catch (err) {
-        alert("Failed to mark purchased: " + err.message);
+        alert("Misluk om item te merk as misluk: " + err.message);
       } finally {
         hideLoader();
       }
@@ -251,12 +273,12 @@ function cardFromData(id, data) {
     deleteBtn.className =
       "bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 text-sm rounded-lg transition";
     deleteBtn.addEventListener("click", async () => {
-      if (confirm("Are you sure you want to delete this item?")) {
+      if (confirm("Is jy seker jy wil hierdie item verwyder?")) {
         try {
           showLoader();
           await deleteDoc(doc(db, "registryItems", id));
         } catch (err) {
-          alert("Failed to delete item: " + err.message);
+          alert("Misluk om item te verwyder: " + err.message);
         } finally {
           hideLoader();
         }
@@ -265,7 +287,7 @@ function cardFromData(id, data) {
     actions.appendChild(deleteBtn);
   }
 
-  meta.appendChild(price);
+  // meta.appendChild(price);
   meta.appendChild(actions);
 
   card.append(img, title, desc, meta);
