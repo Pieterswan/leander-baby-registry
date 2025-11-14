@@ -12,14 +12,11 @@ import {
   serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-// 🔑 Admin PIN
 const ADMIN_PIN = "202603";
 
-// 🧸 Default image for gifts
 const DEFAULT_IMAGE =
   "https://png.pngtree.com/png-clipart/20250116/original/pngtree-baby-boy-shower-celebration-with-gifts-and-balloons-png-image_19124496.png";
 
-// 🔥 Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyBGb6vppg8yrs6RS0ihoIyrxhkKX5oU59U",
   authDomain: "leander-gift-registry-9905b.firebaseapp.com",
@@ -29,7 +26,6 @@ const firebaseConfig = {
   appId: "1:119116512037:web:4831c5a4dc15b63fbf38cc",
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
@@ -49,7 +45,6 @@ const exitAdminBtn = document.getElementById("exitAdminBtn");
 
 let isAdmin = false;
 
-// Loader helpers
 function showLoader() {
   loader.style.display = "flex";
   loader.style.opacity = "1";
@@ -138,8 +133,8 @@ addForm.addEventListener("submit", async (e) => {
       purchased: false,
       contributedGift: false,
     });
-    addForm.reset(); // <-- just reset the form
-    // addSection.classList.add("hidden"); <-- remove this line
+    addForm.reset(); 
+    // addSection.classList.add("hidden");
   } catch (err) {
     alert("Failed to add item: " + err.message);
   } finally {
@@ -148,7 +143,11 @@ addForm.addEventListener("submit", async (e) => {
 });
 
 
+<<<<<<< HEAD
 // Add own (public) gift
+=======
+// Add own gift
+>>>>>>> dc65e26d75833f04c0be7292822554b80daeb918
 addOwnGiftForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const ownName = document.getElementById("ownName").value.trim();
@@ -306,7 +305,11 @@ if (data.purchased) {
 // Initial load
 renderItems();
 
+<<<<<<< HEAD
 // Welcome Card
+=======
+//  Welcome Card
+>>>>>>> dc65e26d75833f04c0be7292822554b80daeb918
 const welcomeCard = document.getElementById("welcomeCard");
 const closeWelcomeCard = document.getElementById("closeWelcomeCard");
 
