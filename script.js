@@ -59,7 +59,7 @@ function hideLoader() {
   setTimeout(() => (loader.style.display = "none"), 300);
 }
 
-// Admin toggle with auto-scroll and focus
+// Admin toggle
 adminToggle.addEventListener("click", () => {
   const pin = prompt("Enter admin PIN:");
   if (pin === ADMIN_PIN) {
@@ -68,7 +68,7 @@ adminToggle.addEventListener("click", () => {
     adminBanner.classList.remove("hidden");
     renderItems();
 
-    // Smoothly scroll to the admin add section
+        // Smoothly scroll to the admin add section
     addSection.scrollIntoView({ behavior: "smooth", block: "center" });
 
     // Focus on the first input after scrolling
@@ -80,7 +80,6 @@ adminToggle.addEventListener("click", () => {
     alert("Wrong PIN.");
   }
 });
-
 
 // Exit admin mode
 exitAdminBtn.addEventListener("click", () => {
@@ -113,7 +112,7 @@ addOwnGiftToggle.addEventListener("click", () => {
 // Cancel user gift form
 cancelOwnGift.addEventListener("click", () => addOwnGiftSection.classList.add("hidden"));
 
-// 🧸 Add gift by admin
+// Add gift by admin
 addForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const name = document.getElementById("name").value.trim();
@@ -149,7 +148,7 @@ addForm.addEventListener("submit", async (e) => {
 });
 
 
-// 🎁 Add own (public) gift
+// Add own (public) gift
 addOwnGiftForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const ownName = document.getElementById("ownName").value.trim();
@@ -205,7 +204,11 @@ function cardFromData(id, data) {
   const card = document.createElement("div");
   card.className =
     "card bg-white rounded-2xl shadow-md flex flex-col overflow-hidden transition-transform hover:scale-[1.02] border border-blue-100 relative";
-  if (data.purchased) card.classList.add("opacity-70");
+if (data.purchased) {
+  card.classList.add("opacity-50", "grayscale");
+}
+
+
 
   const img = document.createElement("img");
   img.src = data.image || DEFAULT_IMAGE;
@@ -222,10 +225,6 @@ function cardFromData(id, data) {
 
   const meta = document.createElement("div");
   meta.className = "flex flex-col items-center px-4 mb-4 text-center";
-
-  // const price = document.createElement("div");
-  // price.className = "font-semibold text-gray-800 mb-2";
-  // price.textContent = data.price ? "R " + data.price : "";
 
   const actions = document.createElement("div");
   actions.className = "flex flex-col gap-2 w-full max-w-[160px]";
@@ -287,7 +286,6 @@ function cardFromData(id, data) {
     actions.appendChild(deleteBtn);
   }
 
-  // meta.appendChild(price);
   meta.appendChild(actions);
 
   card.append(img, title, desc, meta);
@@ -308,7 +306,7 @@ function cardFromData(id, data) {
 // Initial load
 renderItems();
 
-// 🍼 Dismissible Welcome Card
+// Welcome Card
 const welcomeCard = document.getElementById("welcomeCard");
 const closeWelcomeCard = document.getElementById("closeWelcomeCard");
 
