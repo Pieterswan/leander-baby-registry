@@ -143,11 +143,7 @@ addForm.addEventListener("submit", async (e) => {
 });
 
 
-<<<<<<< HEAD
 // Add own (public) gift
-=======
-// Add own gift
->>>>>>> dc65e26d75833f04c0be7292822554b80daeb918
 addOwnGiftForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const ownName = document.getElementById("ownName").value.trim();
@@ -305,11 +301,7 @@ if (data.purchased) {
 // Initial load
 renderItems();
 
-<<<<<<< HEAD
 // Welcome Card
-=======
-//  Welcome Card
->>>>>>> dc65e26d75833f04c0be7292822554b80daeb918
 const welcomeCard = document.getElementById("welcomeCard");
 const closeWelcomeCard = document.getElementById("closeWelcomeCard");
 
